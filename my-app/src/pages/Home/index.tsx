@@ -2,9 +2,14 @@ import { ReactComponent as Search } from "assets/icons/search.svg";
 import Menu from "components/Menu";
 import { navigationItems } from "data/navigation";
 import { RoutePath } from "types/routes";
+import { DateTime } from "luxon";
 import * as S from "./style";
 
 function Home() {
+  const dataDescription = DateTime.now().toLocaleString({
+    ...DateTime.DATETIME_SHORT,
+    weekday: "long",
+  });
   return (
     <S.Home>
       <Menu active={RoutePath.HOME} navItems={navigationItems} />
@@ -14,7 +19,7 @@ function Home() {
             <div>
               <S.HomeHeaderDetailsLogo>Pizza Fresh</S.HomeHeaderDetailsLogo>
               <S.HomeHeaderDetailsDate>
-                Aqui ficará a data
+                {dataDescription}
               </S.HomeHeaderDetailsDate>
             </div>
             <S.HomeHeaderDetailsSearch>
