@@ -6,6 +6,7 @@ import { DateTime } from "luxon";
 import * as S from "./style";
 import ProductItemList from "components/ProductItemList";
 import ProductItem from "components/ProductItem";
+import OrderDetails from "components/OrderDetails";
 
 function Home() {
   const dataDescription = DateTime.now().toLocaleString({
@@ -42,7 +43,7 @@ function Home() {
         </div>
       </S.HomeContent>
       <aside>
-        <p>Detalhes dos pedidos aqui</p>
+        <OrderDetails />
       </aside>
     </S.Home>
   );
