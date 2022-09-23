@@ -4,6 +4,8 @@ import { navigationItems } from "data/navigation";
 import { RoutePath } from "types/routes";
 import { DateTime } from "luxon";
 import * as S from "./style";
+import ProductItemList from "components/ProductItemList";
+import ProductItem from "components/ProductItem";
 
 function Home() {
   const dataDescription = DateTime.now().toLocaleString({
@@ -33,7 +35,9 @@ function Home() {
             <b>Pizzas</b>
           </S.HomeProductTitle>
           <S.HomeProductList>
-            <p>Lista de produtos aqui</p>
+            <ProductItemList>
+            <ProductItem />
+            </ProductItemList>
           </S.HomeProductList>
         </div>
       </S.HomeContent>
