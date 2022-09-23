@@ -36,7 +36,7 @@ function Home() {
           </S.HomeProductTitle>
           <S.HomeProductList>
             <ProductItemList>
-            <ProductItem />
+              <ProductItem />
             </ProductItemList>
           </S.HomeProductList>
         </div>
