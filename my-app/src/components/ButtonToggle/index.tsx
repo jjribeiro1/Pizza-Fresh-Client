@@ -2,7 +2,7 @@ import * as S from "./style";
 import React, { ButtonHTMLAttributes } from "react";
 
 type ButtonType = ButtonHTMLAttributes<HTMLButtonElement>;
-type ButtonToggleProps = {
+export type ButtonToggleProps = {
   value: string;
   active?: boolean;
 } & ButtonType;
