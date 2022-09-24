@@ -1,4 +1,4 @@
-import React from "react";
+import OrderConfirmation from "components/OrderConfirmation";
 import * as S from "./style";
 
 function CheckoutSection() {
@@ -6,7 +6,7 @@ function CheckoutSection() {
     <S.CheckoutSection closing={false}>
       <S.CheckoutSectionConfirmation>
         <S.BackIcon />
-        {"Componente OrderConfirmation"}
+        <OrderConfirmation />
       </S.CheckoutSectionConfirmation>
       <S.CheckoutSectionPayment>
         <S.CheckoutSectionPaymentHead>Pagamento</S.CheckoutSectionPaymentHead>
