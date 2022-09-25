@@ -15,7 +15,8 @@ function Settings() {
         </header>
         <S.SettingsContent>
           <S.SettingsContentSidebar>
-            <NavColumn />
+            {/* Trecho precisa ser alterado posteriormente */}
+            <NavColumn activeRoute={RoutePath.SETTINGS_USERS} />
           </S.SettingsContentSidebar>
           <S.SettingsContentBox>
             <S.SettingsContentBoxEmpty>
