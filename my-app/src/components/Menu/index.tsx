@@ -7,9 +7,11 @@ import { NavItem } from "./types";
 interface MenuProps {
   active: RoutePath;
   navItems: NavItem[];
+  onNavigate: (data: RoutePath) => void;
+  onLogout: () => void;
 }
 
-function Menu({ active, navItems }: MenuProps) {
+function Menu({ active, navItems, onNavigate, onLogout }: MenuProps) {
   return (
     <S.Menu>
       <nav>
@@ -18,13 +20,16 @@ function Menu({ active, navItems }: MenuProps) {
         </S.MenuLogo>
         {navItems.map((item, index) => (
           <S.MenuItem key={`MenuItem-${index}`} active={item.path === active}>
-            <S.MenuItemButton active={item.path === active}>
+            <S.MenuItemButton
+              active={item.path === active}
+              onClick={() => onNavigate(item.path)}
+            >
               {item.icon}
             </S.MenuItemButton>
           </S.MenuItem>
         ))}
       </nav>
-      <S.MenuItemLogout>
+      <S.MenuItemLogout onClick={onLogout}>
         <Logout />
       </S.MenuItemLogout>
     </S.Menu>
