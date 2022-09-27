@@ -1,27 +1,32 @@
-import { ReactComponent as Search } from "assets/icons/search.svg";
 import Menu from "components/Menu";
-import { navigationItems } from "data/navigation";
-import { RoutePath } from "types/routes";
 import { DateTime } from "luxon";
+import { ReactComponent as Search } from "assets/icons/search.svg";
 import * as S from "./style";
+import { RoutePath } from "types/routes";
+import { navigationItems } from "data/navigation";
 import ProductItemList from "components/ProductItemList";
 import ProductItem from "components/ProductItem";
 import OrderDetails from "components/OrderDetails";
-import { Overlay } from "components/Overlay/style";
+import Overlay from "components/Overlay";
 import CheckoutSection from "components/CheckoutSection";
 import { useNavigate } from "react-router-dom";
 import { products } from "mocks/products";
-import { ProductResponse } from "types/Product";
 import { orders } from "mocks/orders";
+import { ProductResponse } from "types/Product";
+import { OrderType } from "types/OrderType";
+import { useState } from "react";
 
 function Home() {
-  const dataDescription = DateTime.now().toLocaleString({
-    ...DateTime.DATETIME_SHORT,
+  const dateDescription = DateTime.now().toLocaleString({
+    ...DateTime.DATE_SHORT,
     weekday: "long",
   });
   const navigate = useNavigate();
+  const [activeOrderType, setActiverOrderType] = useState(
+    OrderType.COMER_NO_LOCAL
+  );
   const handleNavigation = (path: RoutePath) => navigate(path);
-  const handleSelection = (product: ProductResponse) => {};
+  const handleSelection = (product: ProductResponse) => { };
 
   return (
     <S.Home>
@@ -29,15 +34,14 @@ function Home() {
         active={RoutePath.HOME}
         navItems={navigationItems}
         onNavigate={handleNavigation}
-        onLogout={() => navigate(RoutePath.LOGIN)}
-      />
+        onLogout={() => navigate(RoutePath.LOGIN)} />
       <S.HomeContent>
         <header>
           <S.HomeHeaderDetails>
             <div>
               <S.HomeHeaderDetailsLogo>Pizza Fresh</S.HomeHeaderDetailsLogo>
               <S.HomeHeaderDetailsDate>
-                {dataDescription}
+                {dateDescription}
               </S.HomeHeaderDetailsDate>
             </div>
             <S.HomeHeaderDetailsSearch>
@@ -56,20 +60,22 @@ function Home() {
                 products.map((product, index) => (
                   <ProductItem
                     product={product}
-                    onSelect={handleSelection}
                     key={`ProductItem-${index}`}
-                  />
+                    onSelect={handleSelection} />
                 ))}
             </ProductItemList>
           </S.HomeProductList>
         </div>
       </S.HomeContent>
       <aside>
-        <OrderDetails orders={orders} />
+        <OrderDetails
+          orders={orders}
+          onChangeActiveOrderType={(data) => setActiverOrderType(data)}
+          activeOrderType={activeOrderType} />
       </aside>
       {/* <Overlay>
-        <CheckoutSection />
-      </Overlay> */}
+                      <CheckoutSection />
+                  </Overlay> */}
     </S.Home>
   );
 }

@@ -1,5 +1,5 @@
 import { ReactComponent as Trash } from "assets/icons/trash.svg";
-import { ButtonHTMLAttributes, useState } from "react";
+import { ButtonHTMLAttributes, useEffect, useState } from "react";
 import { ProductResponse } from "types/Product";
 import * as S from "./style";
 
@@ -14,10 +14,27 @@ export type OrderItemProps = {
 function OrderItem({
   product,
   quantity,
-  observation,
+  observation = "",
   ...props
 }: OrderItemProps) {
   const [quantityState, setQuantityState] = useState(quantity);
+  const [observationState, setObservationState] = useState(observation);
+
+  const handleObservation = (data: string) => {
+    setObservationState(data);
+  };
+
+  const handleQuantity = (data: number) => {
+    setQuantityState(data);
+  };
+
+  useEffect(() => {
+    handleObservation(observation);
+  }, [observation]);
+
+  useEffect(() => {
+    handleQuantity(quantity);
+  }, [quantity]);
 
   return (
     <S.OrderItem {...props} role="listitem">
@@ -48,6 +65,10 @@ function OrderItem({
         <S.OrderItemLeftObservation
           type="text"
           placeholder="Observações do pedido"
+          value={observationState}
+          onChange={({ target }) => {
+            setObservationState(target.value);
+          }}
         />
       </S.OrderItemLeft>
       <S.OrderItemRight>
