@@ -3,8 +3,16 @@ import ButtonToggle from "components/ButtonToggle";
 import OrderItemList from "components/OrderItemList";
 import ButtonLarge from "components/ButtonLarge";
 import OrderItem from "components/OrderItem";
+import { HTMLAttributes, useEffect, useState } from "react";
+import { OrderItemType } from "types/OrderItemType";
 
-function OrderDetails() {
+type OrderDetailsType = HTMLAttributes<HTMLDivElement>;
+
+type OrderDetailsProps = {
+  orders: OrderItemType[];
+} & OrderDetailsType;
+
+function OrderDetails({ orders }: OrderDetailsProps) {
   return (
     <S.OrderDetails>
       <S.OrderDetailsTitle>Detalhes do Pedido</S.OrderDetailsTitle>
@@ -22,7 +30,20 @@ function OrderDetails() {
               <h4>Preço</h4>
             </S.OrderDetailsListTitle>
           }
-          list={<OrderItem/>}
+          list={
+            Boolean(orders.length) ? (
+              orders.map((item, index) => (
+                <OrderItem
+                  product={item.product}
+                  quantity={item.quantity}
+                  observation={item.observation}
+                  key={`OrderDetails-${index}`}
+                />
+              ))
+            ) : (
+              <S.OrderDetailsListGap />
+            )
+          }
           footer={
             <S.OrderDetailsListFooter>
               <S.OrderDetailsListFooterRow>

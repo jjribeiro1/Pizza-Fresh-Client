@@ -7,7 +7,7 @@ function OrderConfirmation() {
     <S.OrderConfirmation>
       <S.OrderConfirmationHead>Confirmação</S.OrderConfirmationHead>
       <S.OrderConfirmationSub>Detalhes do pedido</S.OrderConfirmationSub>
-      <OrderItemList
+      {/* <OrderItemList
         list={<OrderItem />}
         footer={
           <S.OrderConfirmationFooter>
@@ -17,7 +17,7 @@ function OrderConfirmation() {
             </S.OrderConfirmationFooterRow>
           </S.OrderConfirmationFooter>
         }
-      />
+      /> */}
     </S.OrderConfirmation>
   );
 }
