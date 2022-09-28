@@ -13,10 +13,14 @@ type OrderDetailsProps = {
   orders: OrderItemType[];
   onChangeActiveOrderType: (data: OrderType) => void;
   activeOrderType: OrderType;
+  onRemoveItem: (id: string) => void;
 } & OrderDetailsType;
 
 function OrderDetails({
-  orders, onChangeActiveOrderType, activeOrderType,
+  orders,
+  onChangeActiveOrderType,
+  activeOrderType,
+  onRemoveItem,
 }: OrderDetailsProps) {
   const price = orders
     .map((i) => i.product.price * i.quantity)
@@ -35,41 +39,53 @@ function OrderDetails({
         <ButtonToggle
           onClick={() => onChangeActiveOrderType(OrderType.COMER_NO_LOCAL)}
           active={activeOrderType === OrderType.COMER_NO_LOCAL}
-          value="Comer no Local" />
+          value="Comer no Local"
+        />
         <ButtonToggle
           onClick={() => onChangeActiveOrderType(OrderType.PARA_VIAGEM)}
           active={activeOrderType === OrderType.PARA_VIAGEM}
-          value="P/ Viagem" />
+          value="P/ Viagem"
+        />
         <ButtonToggle
           onClick={() => onChangeActiveOrderType(OrderType.DELIVERY)}
           active={activeOrderType === OrderType.DELIVERY}
-          value="Delivery" />
+          value="Delivery"
+        />
       </S.OrderDetailsButtonGroup>
       <S.OrderDetailsList>
         <OrderItemList
-          header={<S.OrderDetailsListTitle>
-            <h4>Item</h4>
-            <h4>Qtd</h4>
-            <h4>Preço</h4>
-          </S.OrderDetailsListTitle>}
-          list={Boolean(orders.length) ? (
-            orders.map((item, index) => (
-              <OrderItem
-                product={item.product}
-                quantity={item.quantity}
-                observation={item.observation}
-                key={`OrderDetails-${index}`} />
-            ))
-          ) : (
-            <S.OrderDetailsListGap />
-          )}
-          footer={<S.OrderDetailsListFooter>
-            <S.OrderDetailsListFooterRow>
-              <span>Subtotal</span>
-              <span>R$ {priceState.toFixed(2)}</span>
-            </S.OrderDetailsListFooterRow>
-            <ButtonLarge value="Continue para o pagamento" />
-          </S.OrderDetailsListFooter>} />
+          header={
+            <S.OrderDetailsListTitle>
+              <h4>Item</h4>
+              <h4>Qtd</h4>
+              <h4>Preço</h4>
+            </S.OrderDetailsListTitle>
+          }
+          list={
+            Boolean(orders.length) ? (
+              orders.map((item, index) => (
+                <OrderItem
+                  onRemoveItem={() => onRemoveItem(item.product.id)}
+                  product={item.product}
+                  quantity={item.quantity}
+                  observation={item.observation}
+                  key={`OrderDetails-${index}`}
+                />
+              ))
+            ) : (
+              <S.OrderDetailsListGap />
+            )
+          }
+          footer={
+            <S.OrderDetailsListFooter>
+              <S.OrderDetailsListFooterRow>
+                <span>Subtotal</span>
+                <span>R$ {priceState.toFixed(2)}</span>
+              </S.OrderDetailsListFooterRow>
+              <ButtonLarge value="Continue para o pagamento" />
+            </S.OrderDetailsListFooter>
+          }
+        />
       </S.OrderDetailsList>
     </S.OrderDetails>
   );
