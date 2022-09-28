@@ -22,7 +22,7 @@ function Home() {
     ...DateTime.DATE_SHORT,
     weekday: "long",
   });
-  
+
   const navigate = useNavigate();
 
   const [activeOrderType, setActiverOrderType] = useState(
@@ -93,6 +93,7 @@ function Home() {
       <aside>
         <OrderDetails
           orders={orders}
+          onOrdersChange={(data) => setOrders(data)}
           onChangeActiveOrderType={(data) => setActiverOrderType(data)}
           activeOrderType={activeOrderType}
           onRemoveItem={handleRemoveOrderItem}
