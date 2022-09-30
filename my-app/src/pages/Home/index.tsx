@@ -109,6 +109,8 @@ function Home() {
             onCloseSection={() => setProceedToPayment(false)}
             orders={orders}
             onOrdersChange={(data) => setOrders(data)}
+            onChangeActiveOrderType={(data) => setActiverOrderType(data)}
+            activeOrderType={activeOrderType}
             selectedTable={selectedTable}
           />
         </Overlay>
