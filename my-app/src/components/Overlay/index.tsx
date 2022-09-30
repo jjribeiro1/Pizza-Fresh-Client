@@ -6,7 +6,7 @@ export type OverlayProps = {
 };
 
 function Overlay({ children }: OverlayProps) {
-  return <S.Overlay>{children};</S.Overlay>;
+  return <S.Overlay>{children}</S.Overlay>;
 }
 
 export default Overlay;

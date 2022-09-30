@@ -7,6 +7,7 @@ import * as S from "./style";
 type DivType = ButtonHTMLAttributes<HTMLDivElement>;
 
 export type OrderItemProps = {
+  canDelete?: Boolean;
   product: ProductResponse;
   quantity: number;
   observation?: string;
@@ -15,6 +16,7 @@ export type OrderItemProps = {
 } & DivType;
 
 function OrderItem({
+  canDelete = true,
   product,
   quantity,
   observation = "",
@@ -90,9 +92,11 @@ function OrderItem({
         <S.OrderItemRightTotalPrice>
           R$ {Number(product.price * quantityState).toFixed(2)}
         </S.OrderItemRightTotalPrice>
-        <S.OrderItemRightTrash onClick={onRemoveItem}>
-          <Trash />
-        </S.OrderItemRightTrash>
+        {canDelete && (
+          <S.OrderItemRightTrash onClick={onRemoveItem}>
+            <Trash />
+          </S.OrderItemRightTrash>
+        )}
       </S.OrderItemRight>
     </S.OrderItem>
   );

@@ -30,6 +30,7 @@ function Home() {
   );
 
   const [orders, setOrders] = useState<OrderItemType[]>([]);
+  const [proceedToPayment, setProceedToPayment] = useState<boolean>(false);
 
   const handleNavigation = (path: RoutePath) => navigate(path);
 
@@ -93,15 +94,22 @@ function Home() {
       <aside>
         <OrderDetails
           orders={orders}
+          onProceedToPayment={() => setProceedToPayment(true)}
           onOrdersChange={(data) => setOrders(data)}
           onChangeActiveOrderType={(data) => setActiverOrderType(data)}
           activeOrderType={activeOrderType}
           onRemoveItem={handleRemoveOrderItem}
         />
       </aside>
-      {/* <Overlay>
-                      <CheckoutSection />
-                  </Overlay> */}
+      {proceedToPayment && (
+        <Overlay>
+          <CheckoutSection
+            onCloseSection={() => setProceedToPayment(false)}
+            orders={orders}
+            onOrdersChange={(data) => setOrders(data)}
+          />
+        </Overlay>
+      )}
     </S.Home>
   );
 }
