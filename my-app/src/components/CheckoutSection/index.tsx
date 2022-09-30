@@ -11,12 +11,14 @@ type CheckoutSectionType = HTMLAttributes<HTMLDivElement>;
 
 type CheckoutSectionProps = {
   orders: OrderItemType[];
+  selectedTable?: number;
   onOrdersChange: (orders: OrderItemType[]) => void;
   onCloseSection: () => void;
 } & CheckoutSectionType;
 
 function CheckoutSection({
   orders,
+  selectedTable,
   onOrdersChange,
   onCloseSection,
 }: CheckoutSectionProps) {
@@ -102,7 +104,7 @@ function CheckoutSection({
                 id="table"
                 placeholder="01"
                 disabled
-                value={""}
+                value={selectedTable}
               />
             </S.PaymentActionsDetailsTableNumber>
           </S.PaymentActionsDetails>
